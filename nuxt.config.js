@@ -1,9 +1,7 @@
 export default {
   mode: 'spa',
   router: {
-    middleware: [
-      'auth'
-    ]
+    middleware: ['auth']
   },
   /*
    ** Headers of the page
