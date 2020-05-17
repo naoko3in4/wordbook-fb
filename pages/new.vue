@@ -1,27 +1,29 @@
 <template>
-  <div class="container pt-48">
-    <nuxt-link :to="{ name: 'index' }">
-      <app-button color="grey" text="戻る" class="mb-5" />
-    </nuxt-link>
-    <form class="my-0 mx-auto flex flex-col">
-      <label for="単語">
-        <input
-          v-model="formData.word"
-          type="text"
-          placeholder="単語を入力"
-          class="p-1 mb-5 rounded-md"
-        />
-      </label>
-      <label for="意味">
-        <input
-          v-model="formData.meaning"
-          type="text"
-          placeholder="意味を入力"
-          class="p-1 mb-5 rounded-md"
-        />
-      </label>
-      <!-- 今後活用するかも -->
-      <!-- <label for="出題回数">
+  <div>
+    <the-header />
+    <div class="container pt-48">
+      <nuxt-link :to="{ name: 'index' }">
+        <app-button color="grey" text="戻る" class="mb-5" />
+      </nuxt-link>
+      <form class="my-0 mx-auto flex flex-col">
+        <label for="単語">
+          <input
+            v-model="formData.word"
+            type="text"
+            placeholder="単語を入力"
+            class="p-1 mb-5 rounded-md"
+          />
+        </label>
+        <label for="意味">
+          <input
+            v-model="formData.meaning"
+            type="text"
+            placeholder="意味を入力"
+            class="p-1 mb-5 rounded-md"
+          />
+        </label>
+        <!-- 今後活用するかも -->
+        <!-- <label for="出題回数">
         <input
           v-model="formData.appearanceCount"
           type="number"
@@ -42,19 +44,21 @@
           placeholder="正解率"
         />
       </label> -->
-      <app-button
-        color="green"
-        size="large"
-        text="送信"
-        class="my-0 mx-auto"
-        @click.prevent="postWord()"
-      />
-    </form>
+        <app-button
+          color="green"
+          size="large"
+          text="送信"
+          class="my-0 mx-auto"
+          @click.prevent="postWord()"
+        />
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 import AppButton from '@/components/AppButton.vue'
+import TheHeader from '@/components/TheHeader.vue'
 
 // const contentful = require('contentful-management')
 // const client = contentful.createClient({
@@ -63,7 +67,8 @@ import AppButton from '@/components/AppButton.vue'
 
 export default {
   components: {
-    AppButton
+    AppButton,
+    TheHeader
   },
   data() {
     return {
