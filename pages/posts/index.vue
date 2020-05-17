@@ -6,7 +6,7 @@
       <div
         class="all_word_list__wrapper max-w-xs my-0 mx-auto mb-6 p-5 pb-8 rounded-lg overflow-scroll bg-white"
       >
-        <div
+        <!-- <div
           v-for="content in contents"
           :key="content.sys.id"
           class="all_word-list flex justify-between"
@@ -23,7 +23,7 @@
           >
             編集
           </div>
-        </div>
+        </div> -->
       </div>
 
       <nuxt-link :to="{ name: 'index' }">
