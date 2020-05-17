@@ -37,6 +37,7 @@
     <div class="block lg:hidden">
       <button
         class="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-200 hover:text-white hover:border-white"
+        @click="menuClose()"
       >
         <svg
           class="fill-current h-3 w-3"
@@ -48,45 +49,50 @@
         </svg>
       </button>
     </div>
-    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+    <div
+      class="w-full block flex-grow lg:flex lg:items-center lg:w-auto"
+      :class="{ isClose: isMenuClosed }"
+    >
       <div class="text-sm lg:flex-grow">
-        <div @click="$router.push('/')">
-          <p
-            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4"
-          >
+        <div
+          class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4"
+          @click="$router.push('/')"
+        >
+          <span>
             トップ
-          </p>
+          </span>
         </div>
-        <div @click="$router.push('/new')">
-          <p
-            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4"
-          >
+        <div
+          class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4"
+          @click="$router.push('/new')"
+        >
+          <span>
             新規単語登録
-          </p>
+          </span>
         </div>
-        <div @click="$router.push('/posts')">
-          <p
-            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4"
-          >
+        <div
+          class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4"
+          @click="$router.push('/posts')"
+        >
+          <span>
             登録単語一覧
-          </p>
+          </span>
         </div>
-        <!-- クリックで退会処理予定 -->
-        <div @click="$router.push('/new')">
-          <p
-            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4"
-          >
+        <div
+          class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4"
+          @click="$router.push('/')"
+        >
+          <span>
             退会する
-          </p>
+          </span>
         </div>
       </div>
       <div>
-        <!-- クリックでログアウト処理 -->
-        <p
+        <span
           class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
         >
           ログアウト
-        </p>
+        </span>
       </div>
     </div>
   </nav>
@@ -97,8 +103,22 @@ export default {
   name: 'TheHeader',
   props: {
     //
+  },
+  data() {
+    return {
+      isMenuClosed: false
+    }
+  },
+  methods: {
+    menuClose() {
+      this.isMenuClosed = !this.isMenuClosed
+    }
   }
 }
 </script>
 
-<style></style>
+<style>
+.isClose {
+  display: none;
+}
+</style>
