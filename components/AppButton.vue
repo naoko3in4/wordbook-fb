@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="app_button__container">
+    <div class="app_button__container cursor-pointer">
       <button
         :type="type"
         :disabled="disabled"
@@ -107,8 +107,16 @@ export default {
   padding: 10px 25px;
 }
 
+.is_x_medium {
+  padding: 10px 48px;
+}
+
 .is_medium {
   padding: 10px 55px;
+}
+
+.is_x_large {
+  padding: 10px 62px;
 }
 
 .is_large {
