@@ -9,7 +9,7 @@
       <span class="text-blue-800 font-light mb-4"
         >英単語記録と「きのう」の記憶チェック</span
       >
-      <div>
+      <!-- <div>
         <div class="mb-3">
           <app-button
             color="green"
@@ -26,24 +26,45 @@
             @click="signup()"
           />
         </div>
-        <!-- asyncData, computed buttonText と紐付け予定 -->
-        <div class="mb-3">
-          <app-button color="blue" size="medium" :text="buttonText" />
+      </div> -->
+      <!-- asyncData, computed buttonText と紐付け予定 -->
+      <form>
+        <div class="form-content">
+          <label for="ユーザーID">
+            <input v-model="formData.id" type="text" placeholder="ユーザーID" />
+          </label>
         </div>
-      </div>
+        <div class="form-content">
+          <label for="アカウント作成">
+            <input v-model="isCreateMode" type="checkbox" />
+          </label>
+        </div>
+        <div class="mb-3">
+          <app-button
+            color="green"
+            size="large"
+            :text="buttonText"
+            @click="handleClickSubmit()"
+          />
+        </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
-import Cookies from 'universal-cookie'
+// import Cookies from 'universal-cookie'
+// import { mapGetters, mapActions } from 'vuex'
 import AppButton from '@/components/AppButton'
 
 export default {
   components: {
     AppButton
   },
-  asyncData() {
+  asyncData({ redirect, store }) {
+    if (store.getter.user) {
+      redirect('/posts/')
+    }
     return {
       isCreateMode: false,
       formData: {
@@ -57,18 +78,20 @@ export default {
     }
   },
   methods: {
-    login() {
-      const cookies = new Cookies()
-      cookies.set('credential', 'true', { maxAge: 10 })
-      // cookies.set('credential', 'true', { maxAge: 60 * 60 * 24 * 7 })
-      this.$router.push('/')
-    },
-    signup() {
-      const cookies = new Cookies()
-      cookies.set('credential', 'true', { maxAge: 10 })
-      // cookies.set('credential', 'true', { maxAge: 60 * 60 * 24 * 7 })
-      this.$router.push('/signup')
-    }
+    // async handleClickSubmit() {
+    // }
+    // login() {
+    //   const cookies = new Cookies()
+    //   cookies.set('credential', 'true', { maxAge: 10 })
+    //   cookies.set('credential', 'true', { maxAge: 60 * 60 * 24 * 7 })
+    //   this.$router.push('/')
+    // },
+    // signup() {
+    //   const cookies = new Cookies()
+    //   cookies.set('credential', 'true', { maxAge: 10 })
+    //   cookies.set('credential', 'true', { maxAge: 60 * 60 * 24 * 7 })
+    //   this.$router.push('/signup')
+    // }
   }
 }
 </script>
