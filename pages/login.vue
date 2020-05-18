@@ -26,6 +26,10 @@
             @click="signup()"
           />
         </div>
+        <!-- asyncData, computed buttonText と紐付け予定 -->
+        <div class="mb-3">
+          <app-button color="blue" size="medium" :text="buttonText" />
+        </div>
       </div>
     </div>
   </div>
@@ -38,6 +42,19 @@ import AppButton from '@/components/AppButton'
 export default {
   components: {
     AppButton
+  },
+  asyncData() {
+    return {
+      isCreateMode: false,
+      formData: {
+        id: ''
+      }
+    }
+  },
+  computed: {
+    buttonText() {
+      return this.isCreateMode ? '新規登録' : 'ログイン'
+    }
   },
   methods: {
     login() {

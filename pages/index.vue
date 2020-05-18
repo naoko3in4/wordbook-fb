@@ -17,8 +17,6 @@
               @click="testStart()"
             />
           </div>
-          1
-
           <div v-if="isShown">
             <ul
               v-for="(content, index) in contentsCreatedAtYesterday"
