@@ -18,9 +18,14 @@
             @click="login()"
           />
         </div>
-        <nuxt-link :to="{ name: '/signin' }">
-          <app-button color="grey" size="x_large" text="サインイン" />
-        </nuxt-link>
+        <div class="mb-3">
+          <app-button
+            color="grey"
+            size="medium"
+            text="サインアップ"
+            @click="signup()"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -40,6 +45,12 @@ export default {
       cookies.set('credential', 'true', { maxAge: 10 })
       // cookies.set('credential', 'true', { maxAge: 60 * 60 * 24 * 7 })
       this.$router.push('/')
+    },
+    signup() {
+      const cookies = new Cookies()
+      cookies.set('credential', 'true', { maxAge: 10 })
+      // cookies.set('credential', 'true', { maxAge: 60 * 60 * 24 * 7 })
+      this.$router.push('/signup')
     }
   }
 }

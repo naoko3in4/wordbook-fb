@@ -112,11 +112,7 @@ export default {
 }
 
 .is_medium {
-  padding: 10px 55px;
-}
-
-.is_x_large {
-  padding: 10px 62px;
+  padding: 10px 54px;
 }
 
 .is_large {

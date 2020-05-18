@@ -1,5 +1,5 @@
 <template>
-  <p>サインイン</p>
+  <p>サインアップ</p>
 </template>
 
 <script>
