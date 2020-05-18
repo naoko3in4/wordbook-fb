@@ -1,0 +1,23 @@
+// export const state = () => ({
+//   isLoggedIn: false,
+//   user: null
+// })
+
+// export const getters = {
+//   isLoggedIn: (state) => state.isLoggedIn,
+//   user: (state) => state.user
+// }
+
+// export const mutations = {
+//   setUser(state, { user }){
+//     state.user = user
+//     state.isLoggedIn = true
+//   }
+// }
+
+// export const actions = {
+//   async login({ commit }, { id }) {
+//     const user = await this.$axios.$get(`/users/${id}.json`)
+//     if (!user)
+//   }
+// }
