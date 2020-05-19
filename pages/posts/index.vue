@@ -6,24 +6,22 @@
       <div
         class="all_word_list__wrapper max-w-xs my-0 mx-auto mb-6 p-5 pb-8 rounded-lg overflow-scroll bg-white"
       >
-        <!-- <div
-          v-for="content in contents"
-          :key="content.sys.id"
+        <div
+          v-for="post in showPosts"
+          :key="post.id"
           class="all_word-list flex justify-between"
         >
           <div class="leading-8 whitespace-no-wrap overflow-scroll">
-            <span class="text-blue-700 font-bold">{{
-              content.fields.word
-            }}</span
-            ><span class="text-sm">:{{ content.fields.meaning }}</span>
+            <span class="text-blue-700 font-bold">{{ post.word }}</span
+            ><span class="text-sm">:{{ post.meaning }}</span>
           </div>
           <div
             class="edit-btn w-10 leading-8 rounded-md text-center text-gray-500 border border-gray-400"
-            @click="goToEditPage(content.sys.id)"
+            @click="goToEditPage(post.id)"
           >
             編集
           </div>
-        </div> -->
+        </div>
       </div>
 
       <nuxt-link :to="{ name: 'index' }">
@@ -42,7 +40,32 @@ export default {
   components: {
     AppButtton,
     TheHeader
+  },
+  computed: {
+    showPosts() {
+      return [
+        {
+          id: '001',
+          word: 'red',
+          meaning: '赤',
+          created_at: '2020/05/18 16:00:00',
+          user: {
+            id: 'naoko3in4'
+          }
+        },
+        {
+          id: '002',
+          word: 'pink',
+          meaning: 'ピンク',
+          created_at: '2020/05/18 17:00:00',
+          user: {
+            id: 'naoko3in4'
+          }
+        }
+      ]
+    }
   }
+
   // asyncData({ env }) {
   //   return contentfulClient
   //     .getEntries()

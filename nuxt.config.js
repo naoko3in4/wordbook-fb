@@ -1,7 +1,7 @@
 export default {
   mode: 'spa',
   router: {
-    middleware: ['auth']
+    middleware: ['auth-cookie']
   },
   /*
    ** Headers of the page
@@ -30,7 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/vue-notification'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -65,5 +65,14 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  env: {
+    APIKEY: process.env.apiKey,
+    AUTHDOMAIN: process.env.authDomain,
+    DATABASEURL: process.env.databaseURL,
+    PROJECTID: process.env.projectId,
+    STORAGEBUCKET: process.env.storageBucket,
+    APPID: process.env.appId,
+    BASEURL: process.env.BASE_URL
   }
 }

@@ -5,6 +5,9 @@
 </template>
 
 <style>
+/* Quicksand font */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -30,6 +33,11 @@ html {
   min-height: 100vh;
   align-items: center;
   text-align: center;
+}
+
+.title {
+  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 .back__btn {

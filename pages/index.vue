@@ -17,7 +17,6 @@
               @click="testStart()"
             />
           </div>
-
           <div v-if="isShown">
             <ul
               v-for="(content, index) in contentsCreatedAtYesterday"
@@ -111,14 +110,6 @@ export default {
   @apply min-h-screen flex justify-center items-center text-center mx-auto;
 }
 */
-/* Quicksand font */
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
 .isStarted {
   display: none;
 }
