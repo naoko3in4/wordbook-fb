@@ -6,7 +6,7 @@ const config = {
   APIKEY: process.env.apiKey,
   AUTHDOMAIN: process.env.authDomain,
   DATABASEURL: process.env.databaseURL,
-  projectId: process.env.projectId,
+  PROJECTID: process.env.projectId,
   STORAGEBUCKET: process.env.storageBucket,
   MESSAGINGSENDERID: process.env.messagingSenderId,
   APPID: process.env.appId,
@@ -14,8 +14,8 @@ const config = {
 }
 
 if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-  firebase.analytics();
+  firebase.initializeApp(config)
+  firebase.analytics()
 }
 
 // Realtime Database

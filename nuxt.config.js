@@ -1,7 +1,7 @@
 export default {
   mode: 'spa',
   router: {
-    middleware: ['auth']
+    middleware: ['auth-cookie']
   },
   /*
    ** Headers of the page
@@ -67,12 +67,12 @@ export default {
     extend(config, ctx) {}
   },
   env: {
-    APIKEY,
-    AUTHDOMAIN,
-    DATABASEURL,
-    PROJECTID,
-    STORAGEBUCKET,
-    APPID,
-    BASEURL: process.env.BASE_URL 
+    APIKEY: process.env.apiKey,
+    AUTHDOMAIN: process.env.authDomain,
+    DATABASEURL: process.env.databaseURL,
+    PROJECTID: process.env.projectId,
+    STORAGEBUCKET: process.env.storageBucket,
+    APPID: process.env.appId,
+    BASEURL: process.env.BASE_URL
   }
 }

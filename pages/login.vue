@@ -9,25 +9,6 @@
       <span class="text-blue-800 font-light mb-4"
         >英単語記録と「きのう」の記憶チェック</span
       >
-      <!-- <div>
-        <div class="mb-3">
-          <app-button
-            color="green"
-            size="large"
-            text="ログイン"
-            @click="login()"
-          />
-        </div>
-        <div class="mb-3">
-          <app-button
-            color="grey"
-            size="medium"
-            text="サインアップ"
-            @click="signup()"
-          />
-        </div>
-      </div> -->
-      <!-- asyncData, computed buttonText と紐付け予定 -->
       <form>
         <div class="form-content">
           <label for="ユーザーID">
@@ -55,8 +36,8 @@
 </template>
 
 <script>
-// import Cookies from 'universal-cookie'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import Cookies from 'universal-cookie'
 import AppButton from '@/components/AppButton'
 
 export default {
@@ -77,14 +58,17 @@ export default {
   computed: {
     buttonText() {
       return this.isCreateMode ? '新規登録' : 'ログイン'
-    }
+    },
+    ...mapGetters(['user'])
   },
   methods: {
+    ...mapActions(['login', 'register']),
     async handleClickSubmit() {
+      const cookies = new Cookies()
       if (this.isCreateMode) {
         try {
           await this.register({ ...this.formData })
-          this.$notify({
+          await this.$notify({
             group: 'foo',
             type: 'success',
             title: 'アカウント作成完了',
@@ -92,7 +76,8 @@ export default {
             position: 'top left',
             duration: 1000
           })
-          this.$router.push('/posts/')
+          cookies.set('user', JSON.stringify(this.user))
+          this.$router.push('/')
         } catch {
           this.$notify({
             group: 'foo',
@@ -106,7 +91,7 @@ export default {
       } else {
         try {
           await this.login({ ...this.formData })
-          this.$notify({
+          await this.$notify({
             group: 'foo',
             type: 'success',
             title: 'ログイン成功',
@@ -114,7 +99,8 @@ export default {
             position: 'top left',
             duration: 1000
           })
-          this.$router.push('/posts/')
+          cookies.set('user', JSON.stringify(this.user))
+          this.$router.push('/')
         } catch (e) {
           this.$notify({
             group: 'foo',
@@ -122,24 +108,11 @@ export default {
             title: 'ログイン失敗',
             text: '不正なユーザーIDです',
             position: 'top left',
-            duration: 3000
+            duration: 1000
           })
         }
       }
-    },
-    ...mapActions(['login', 'register'])
-    // login() {
-    //   const cookies = new Cookies()
-    //   cookies.set('credential', 'true', { maxAge: 10 })
-    //   cookies.set('credential', 'true', { maxAge: 60 * 60 * 24 * 7 })
-    //   this.$router.push('/')
-    // },
-    // signup() {
-    //   const cookies = new Cookies()
-    //   cookies.set('credential', 'true', { maxAge: 10 })
-    //   cookies.set('credential', 'true', { maxAge: 60 * 60 * 24 * 7 })
-    //   this.$router.push('/signup')
-    // }
+    }
   }
 }
 </script>
