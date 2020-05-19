@@ -37,6 +37,7 @@
         <div class="form-content">
           <label for="アカウント作成">
             <input v-model="isCreateMode" type="checkbox" />
+            アカウント作成
           </label>
         </div>
         <div class="mb-3">
@@ -44,17 +45,18 @@
             color="green"
             size="large"
             :text="buttonText"
-            @click="handleClickSubmit()"
+            @click.prevent="handleClickSubmit()"
           />
         </div>
       </form>
+      <notifications group="foo" classes="my-style" />
     </div>
   </div>
 </template>
 
 <script>
 // import Cookies from 'universal-cookie'
-// import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import AppButton from '@/components/AppButton'
 
 export default {
@@ -62,7 +64,7 @@ export default {
     AppButton
   },
   asyncData({ redirect, store }) {
-    if (store.getter.user) {
+    if (store.getters.user) {
       redirect('/posts/')
     }
     return {
@@ -78,8 +80,54 @@ export default {
     }
   },
   methods: {
-    // async handleClickSubmit() {
-    // }
+    async handleClickSubmit() {
+      if (this.isCreateMode) {
+        try {
+          await this.register({ ...this.formData })
+          this.$notify({
+            group: 'foo',
+            type: 'success',
+            title: 'アカウント作成完了',
+            text: `${this.formData.id}として登録しました`,
+            position: 'top left',
+            duration: 1000
+          })
+          this.$router.push('/posts/')
+        } catch {
+          this.$notify({
+            group: 'foo',
+            type: 'warn',
+            title: 'アカウント作成失敗',
+            text: 'すでに登録されているか不正なユーザーIDです',
+            position: 'top left',
+            duration: 1000
+          })
+        }
+      } else {
+        try {
+          await this.login({ ...this.formData })
+          this.$notify({
+            group: 'foo',
+            type: 'success',
+            title: 'ログイン成功',
+            text: `${this.formData.id}としてログインしました`,
+            position: 'top left',
+            duration: 1000
+          })
+          this.$router.push('/posts/')
+        } catch (e) {
+          this.$notify({
+            group: 'foo',
+            type: 'warn',
+            title: 'ログイン失敗',
+            text: '不正なユーザーIDです',
+            position: 'top left',
+            duration: 3000
+          })
+        }
+      }
+    },
+    ...mapActions(['login', 'register'])
     // login() {
     //   const cookies = new Cookies()
     //   cookies.set('credential', 'true', { maxAge: 10 })
@@ -96,4 +144,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.my-style {
+  background: #b9babb;
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+}
+</style>
