@@ -6,19 +6,24 @@
       >
         wordbook
       </h1>
-      <span class="text-blue-800 font-light mb-4"
+      <span class="text-blue-800 font-light mb-3"
         >英単語記録と「きのう」の記憶チェック</span
       >
       <form>
         <div class="form-content">
           <label for="ユーザーID">
-            <input v-model="formData.id" type="text" placeholder="ユーザーID" />
+            <input
+              v-model="formData.id"
+              type="text"
+              placeholder="ユーザーID"
+              class="rounded-sm p-1 px-5"
+            />
           </label>
         </div>
-        <div class="form-content">
+        <div class="form-content" id="account">
           <label for="アカウント作成">
             <input v-model="isCreateMode" type="checkbox" />
-            アカウント作成
+            <span class="text-sm text-green-800">アカウント作成</span>
           </label>
         </div>
         <div class="mb-3">
@@ -129,5 +134,10 @@ export default {
   color: #fff;
   border-radius: 7px;
   padding: 7px;
+}
+
+#account {
+  width: 205px;
+  text-align: left;
 }
 </style>
