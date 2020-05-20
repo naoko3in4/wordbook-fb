@@ -77,7 +77,10 @@ export default {
             duration: 1000
           })
           cookies.set('user', JSON.stringify(this.user))
-          this.$router.push('/')
+          const routeTransmit = () => {
+            this.$router.push('/')
+          }
+          setTimeout(routeTransmit, 1000)
         } catch {
           this.$notify({
             group: 'foo',
@@ -100,7 +103,10 @@ export default {
             duration: 1000
           })
           cookies.set('user', JSON.stringify(this.user))
-          this.$router.push('/')
+          const routeTransmit = () => {
+            this.$router.push('/')
+          }
+          setTimeout(routeTransmit, 1000)
         } catch (e) {
           this.$notify({
             group: 'foo',
