@@ -6,19 +6,24 @@
       >
         wordbook
       </h1>
-      <span class="text-blue-800 font-light mb-4"
+      <span class="text-blue-800 font-light mb-3"
         >英単語記録と「きのう」の記憶チェック</span
       >
       <form>
         <div class="form-content">
           <label for="ユーザーID">
-            <input v-model="formData.id" type="text" placeholder="ユーザーID" />
+            <input
+              v-model="formData.id"
+              type="text"
+              placeholder="ユーザーID"
+              class="rounded-sm p-1 px-5"
+            />
           </label>
         </div>
-        <div class="form-content">
+        <div id="account" class="form-content">
           <label for="アカウント作成">
             <input v-model="isCreateMode" type="checkbox" />
-            アカウント作成
+            <span class="text-sm text-green-800">アカウント作成</span>
           </label>
         </div>
         <div class="mb-3">
@@ -46,7 +51,7 @@ export default {
   },
   asyncData({ redirect, store }) {
     if (store.getters.user) {
-      redirect('/posts/')
+      redirect('/')
     }
     return {
       isCreateMode: false,
@@ -65,6 +70,7 @@ export default {
     ...mapActions(['login', 'register']),
     async handleClickSubmit() {
       const cookies = new Cookies()
+      console.log(cookies)
       if (this.isCreateMode) {
         try {
           await this.register({ ...this.formData })
@@ -73,18 +79,19 @@ export default {
             type: 'success',
             title: 'アカウント作成完了',
             text: `${this.formData.id}として登録しました`,
-            position: 'top left',
             duration: 1000
           })
           cookies.set('user', JSON.stringify(this.user))
-          this.$router.push('/')
+          const routeTransmit = () => {
+            this.$router.push('/')
+          }
+          setTimeout(routeTransmit, 1000)
         } catch {
           this.$notify({
             group: 'foo',
             type: 'warn',
             title: 'アカウント作成失敗',
             text: 'すでに登録されているか不正なユーザーIDです',
-            position: 'top left',
             duration: 1000
           })
         }
@@ -96,18 +103,19 @@ export default {
             type: 'success',
             title: 'ログイン成功',
             text: `${this.formData.id}としてログインしました`,
-            position: 'top left',
             duration: 1000
           })
           cookies.set('user', JSON.stringify(this.user))
-          this.$router.push('/')
+          const routeTransmit = () => {
+            this.$router.push('/')
+          }
+          setTimeout(routeTransmit, 1000)
         } catch (e) {
           this.$notify({
             group: 'foo',
             type: 'warn',
             title: 'ログイン失敗',
             text: '不正なユーザーIDです',
-            position: 'top left',
             duration: 1000
           })
         }
@@ -123,5 +131,10 @@ export default {
   color: #fff;
   border-radius: 7px;
   padding: 7px;
+}
+
+#account {
+  width: 205px;
+  text-align: left;
 }
 </style>
