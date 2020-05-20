@@ -1,15 +1,19 @@
 import Cookies from 'universal-cookie'
 
-export default ({ req, store }) => {
-  if (process.browser) {
-    return
-  }
-  const cookies = new Cookies(req.headers.cookie)
-  console.log('cookies', cookies)
+export default ({ route, store, redirect }) => {
+  const cookies = new Cookies()
   const user = cookies.get('user')
+  if (!user) {
+    if (route.path === '/login') {
+      return
+    }
+    return redirect('/login')
+  }
   if (user && user.id) {
-    const { id, likes } = user
-    console.log('user', user)
-    store.commit('setUser', { user: { id, likes } })
+    const { id } = user
+    store.commit('setUser', { user: { id } })
+    if (route.path === 'login') {
+      return redirect('/')
+    }
   }
 }

@@ -20,7 +20,7 @@
             />
           </label>
         </div>
-        <div class="form-content" id="account">
+        <div id="account" class="form-content">
           <label for="アカウント作成">
             <input v-model="isCreateMode" type="checkbox" />
             <span class="text-sm text-green-800">アカウント作成</span>
@@ -51,7 +51,7 @@ export default {
   },
   asyncData({ redirect, store }) {
     if (store.getters.user) {
-      redirect('/posts/')
+      redirect('/')
     }
     return {
       isCreateMode: false,
@@ -70,6 +70,7 @@ export default {
     ...mapActions(['login', 'register']),
     async handleClickSubmit() {
       const cookies = new Cookies()
+      console.log(cookies)
       if (this.isCreateMode) {
         try {
           await this.register({ ...this.formData })
@@ -78,7 +79,6 @@ export default {
             type: 'success',
             title: 'アカウント作成完了',
             text: `${this.formData.id}として登録しました`,
-            position: 'top left',
             duration: 1000
           })
           cookies.set('user', JSON.stringify(this.user))
@@ -92,7 +92,6 @@ export default {
             type: 'warn',
             title: 'アカウント作成失敗',
             text: 'すでに登録されているか不正なユーザーIDです',
-            position: 'top left',
             duration: 1000
           })
         }
@@ -104,7 +103,6 @@ export default {
             type: 'success',
             title: 'ログイン成功',
             text: `${this.formData.id}としてログインしました`,
-            position: 'top left',
             duration: 1000
           })
           cookies.set('user', JSON.stringify(this.user))
@@ -118,7 +116,6 @@ export default {
             type: 'warn',
             title: 'ログイン失敗',
             text: '不正なユーザーIDです',
-            position: 'top left',
             duration: 1000
           })
         }
