@@ -70,7 +70,6 @@ export default {
     ...mapActions(['login', 'register']),
     async handleClickSubmit() {
       const cookies = new Cookies()
-      console.log(cookies)
       if (this.isCreateMode) {
         try {
           await this.register({ ...this.formData })

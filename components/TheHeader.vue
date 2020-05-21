@@ -128,9 +128,7 @@ export default {
       this.isMenuClosed = !this.isMenuClosed
     },
     async handleClicklogout() {
-      console.log('aaaaa')
       await this.logout()
-      console.log('this.logout', this.logout)
       this.$router.push('/login')
     }
   }
