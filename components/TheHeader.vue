@@ -87,9 +87,17 @@
           </span>
         </div>
       </div>
+      <div
+        class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4"
+      >
+        <span>
+          {{ user.id }}
+        </span>
+      </div>
       <div>
         <span
           class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+          @click="handleClicklogout()"
         >
           ログアウト
         </span>
@@ -99,6 +107,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'TheHeader',
   props: {
@@ -109,9 +119,17 @@ export default {
       isMenuClosed: false
     }
   },
+  computed: {
+    ...mapGetters(['user'])
+  },
   methods: {
+    ...mapActions(['logout']),
     menuClose() {
       this.isMenuClosed = !this.isMenuClosed
+    },
+    async handleClicklogout() {
+      await this.logout()
+      this.$router.push('/login')
     }
   }
 }
